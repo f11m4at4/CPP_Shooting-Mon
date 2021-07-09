@@ -26,8 +26,22 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
+
+	void Horizontal(float value);
+	void Vertical(float value);
 	
 public:
 	// 필요속성 : 이동속도
+	UPROPERTY(EditAnywhere, Category="Setting", BlueprintReadOnly)
 	float speed = 500;
+
+private:
+	UPROPERTY()
+	class AShootPlayer* me;
+
+	UPROPERTY()
+	float h;
+	UPROPERTY()
+	float v;
 };

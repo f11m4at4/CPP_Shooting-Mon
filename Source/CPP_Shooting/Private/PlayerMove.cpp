@@ -2,6 +2,7 @@
 
 
 #include "PlayerMove.h"
+#include "ShootPlayer.h"
 
 // Sets default values for this component's properties
 UPlayerMove::UPlayerMove()
@@ -19,7 +20,7 @@ void UPlayerMove::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	me = Cast<AShootPlayer>(GetOwner());
 	
 }
 
@@ -31,10 +32,33 @@ void UPlayerMove::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 
 	// 사용자의 입력에 따라 상하좌우로 이동하고 싶다.
 	// 1. 방향이 필요
-	FVector dir = FVector::RightVector;
+	FVector dir = FVector(0, h, v);
 	// 2. 이동하고 싶다.
 	// P = P0 + vt
-	AActor* me = GetOwner();
+	
+	if (me)
+	{
+		FVector P0 = me->GetActorLocation();
+		FVector P = P0 + dir * speed * DeltaTime;
+		me->SetActorLocation(P);
+	}
+}
 
+void UPlayerMove::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+	// input bind
+	PlayerInputComponent->BindAxis(TEXT("Horizontal"), this, &UPlayerMove::Horizontal);
+	PlayerInputComponent->BindAxis(TEXT("Vertical"), this, &UPlayerMove::Vertical);
+}
+
+
+void UPlayerMove::Horizontal(float value)
+{
+	h = value;
+}
+
+void UPlayerMove::Vertical(float value)
+{
+	v = value;
 }
 
