@@ -13,7 +13,7 @@ AShootPlayer::AShootPlayer()
 
 	// 액터를 구성할 컴포넌트를 붙여주자
 	playerMove = CreateDefaultSubobject<UPlayerMove>(TEXT("PlayerMove"));
-	
+
 }
 
 // Called when the game starts or when spawned
