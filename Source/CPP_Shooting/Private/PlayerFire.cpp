@@ -3,6 +3,8 @@
 
 #include "PlayerFire.h"
 #include "ShootPlayer.h"
+#include <Components/ArrowComponent.h>
+#include "Bullet.h"
 
 // Sets default values for this component's properties
 UPlayerFire::UPlayerFire()
@@ -42,12 +44,22 @@ void UPlayerFire::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 
 void UPlayerFire::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &UPlayerFire::Fire);
 }
 
 // 사용자가 발사버튼을 누르면 호출
 void UPlayerFire::Fire()
 {
 	// 총알을 발사하고 싶다.
+	// 1. 총알이 필요하다.(총알을 만든다.)
+	// -> Spawn Actor
+	auto bullet = GetWorld()->SpawnActor<ABullet>(bulletFactory);
+	// 2. 총알을 배치하고 싶다.
+	if (bullet)
+	{
+		// 위치 값 지정
+		bullet->SetActorLocation(firePosition->GetComponentLocation());
+		bullet->SetActorRotation(firePosition->GetComponentRotation());
+	}
 }
 

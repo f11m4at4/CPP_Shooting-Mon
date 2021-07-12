@@ -37,7 +37,7 @@ private:
 	UPROPERTY()
 	class UArrowComponent* firePosition;
 
-	UPROPERTY(EditAnywhere, Category="BulletFactory", meta = (AllowPrivateAccess = true))
+	UPROPERTY(EditDefaultsOnly, Category="BulletFactory", meta = (AllowPrivateAccess = true))
 	TSubclassOf<class ABullet> bulletFactory;
 
 	UPROPERTY()

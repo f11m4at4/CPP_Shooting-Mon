@@ -33,6 +33,9 @@ AShootPlayer::AShootPlayer()
 	playerFire = CreateDefaultSubobject<UPlayerFire>(TEXT("PlayerFire"));
 	firePosition = CreateDefaultSubobject<UArrowComponent>(TEXT("FirePosition"));
 	firePosition->SetupAttachment(RootComponent);
+
+	// 자동으로 컨트롤러 제어를 받을 수 있도록 설정
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
 // Called when the game starts or when spawned
