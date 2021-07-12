@@ -59,5 +59,6 @@ void AShootPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	// PlayerMove 컴포넌트의 SetupPlayer 함수 호출해주고 싶다.
 	playerMove->SetupPlayerInputComponent(PlayerInputComponent);
+	playerFire->SetupPlayerInputComponent(PlayerInputComponent);
 }
 

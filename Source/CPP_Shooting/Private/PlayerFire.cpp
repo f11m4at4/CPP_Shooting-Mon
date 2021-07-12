@@ -2,6 +2,7 @@
 
 
 #include "PlayerFire.h"
+#include "ShootPlayer.h"
 
 // Sets default values for this component's properties
 UPlayerFire::UPlayerFire()
@@ -19,8 +20,15 @@ void UPlayerFire::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	me = Cast<AShootPlayer>(GetOwner());
+
+	// 총구 할당해주기
+	if (me)
+	{
+		// ShootPlayer 한테 붙어 있는 컴포넌트 얻어오기
+		// 얻어온 컴포넌트를 원하는 타입으로 변경하기
+		firePosition = Cast<UArrowComponent>(me->GetDefaultSubobjectByName(TEXT("FirePosition")));
+	}
 }
 
 
@@ -30,5 +38,16 @@ void UPlayerFire::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UPlayerFire::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+
+}
+
+// 사용자가 발사버튼을 누르면 호출
+void UPlayerFire::Fire()
+{
+	// 총알을 발사하고 싶다.
 }
 

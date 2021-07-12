@@ -27,12 +27,19 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
+
+	// 총알 발사 함수
+	void Fire();
+
 private:
 	// 필요속성 : 총구, 총알공장
-	UPROPERTY(VisibleAnywhere, Category = "FirePosition")
+	UPROPERTY()
 	class UArrowComponent* firePosition;
 
-	UPROPERTY(VisibleAnywhere, Category="BulletFactory")
+	UPROPERTY(EditAnywhere, Category="BulletFactory", meta = (AllowPrivateAccess = true))
 	TSubclassOf<class ABullet> bulletFactory;
+
+	UPROPERTY()
+	class AShootPlayer* me;
 };
