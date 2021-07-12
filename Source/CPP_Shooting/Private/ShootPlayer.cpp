@@ -4,6 +4,10 @@
 #include "ShootPlayer.h"
 #include "CPP_Shooting.h"
 #include "PlayerMove.h"
+#include "PlayerFire.h"
+#include <Components/ArrowComponent.h>
+#include <Components/BoxComponent.h>
+#include <Components/StaticMeshComponent.h>
 
 // Sets default values
 AShootPlayer::AShootPlayer()
@@ -11,9 +15,24 @@ AShootPlayer::AShootPlayer()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Box Collision 컴포넌트 추가
+	boxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollision"));
+	// Hit event 발생 시킬수 있다.
+	RootComponent = boxCollision;
+	// Block 형태로 충돌 옵션이 설정
+	boxCollision->SetCollisionProfileName(TEXT("BlockAll"));
+
+	// Body Mesh 컴포넌트 추가
+	bodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
+	bodyMesh->SetupAttachment(RootComponent);
+	// 충돌 안되도록 처리
+	bodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 	// 액터를 구성할 컴포넌트를 붙여주자
 	playerMove = CreateDefaultSubobject<UPlayerMove>(TEXT("PlayerMove"));
-
+	playerFire = CreateDefaultSubobject<UPlayerFire>(TEXT("PlayerFire"));
+	firePosition = CreateDefaultSubobject<UArrowComponent>(TEXT("FirePosition"));
+	firePosition->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

@@ -28,4 +28,17 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category="PlayerMove")
 	class UPlayerMove* playerMove;
+
+	UPROPERTY(VisibleAnywhere, Category = "PlayerFire")
+	class UPlayerFire* playerFire;
+
+	UPROPERTY(VisibleAnywhere, Category = "FirePosition")
+	class UArrowComponent* firePosition;
+
+	// Box
+	UPROPERTY(VisibleAnywhere, Category = "Collision")
+	class UBoxComponent* boxCollision;
+	// StaticMesh
+	UPROPERTY(VisibleAnywhere, Category = "BodyMesh")
+	class UStaticMeshComponent* bodyMesh;
 };

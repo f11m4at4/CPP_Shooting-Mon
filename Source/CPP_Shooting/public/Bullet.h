@@ -24,9 +24,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Box
-	UPROPERTY(EditAnywhere, Category="Collision")
+	UPROPERTY(VisibleAnywhere, Category="Collision")
 	class UBoxComponent* boxCollision;
 	// StaticMesh
-	UPROPERTY(EditAnywhere, Category = "BodyMesh")
+	UPROPERTY(VisibleAnywhere, Category = "BodyMesh")
 	class UStaticMeshComponent* bodyMesh;
+
+	UPROPERTY(VisibleAnywhere, Category="Setting")
+	float speed = 1000;
 };

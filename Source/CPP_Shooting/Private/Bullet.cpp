@@ -46,6 +46,10 @@ void ABullet::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// 위로 계속 이동시키고 싶다.
+	FVector dir = FVector::UpVector;
 	// 필요속성 : 이동속도
+	// P = P0 + vt
+	FVector P = GetActorLocation() + dir * speed * DeltaTime;
+	SetActorLocation(P, true);
 }
 
