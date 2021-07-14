@@ -42,4 +42,12 @@ public:
 	// EnemyMove 哪器惩飘
 	UPROPERTY(VisibleAnywhere, Category="EnemyMove")
 	class UEnemyMove* enemyMove;
+
+	// 气惯瓤苞
+	UPROPERTY(EditDefaultsOnly, Category="Explosion")
+	class UParticleSystem* explosionFactory;
+
+	// 气惯家府 加己
+	UPROPERTY(EditDefaultsOnly, Category = "Audio")
+	class USoundBase* explosionSound;
 };
