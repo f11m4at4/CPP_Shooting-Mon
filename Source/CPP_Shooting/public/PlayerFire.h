@@ -42,4 +42,8 @@ private:
 
 	UPROPERTY()
 	class AShootPlayer* me;
+
+	// 醚舅 惯荤家府 加己
+	UPROPERTY(EditDefaultsOnly, Category = "Audio")
+	class USoundBase* bulletSound;
 };
