@@ -23,6 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void OnCollisionEnter( UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
+
+
 	// BoxCollision
 	UPROPERTY(VisibleAnywhere, Category="Collision")
 	class UBoxComponent* collision;
