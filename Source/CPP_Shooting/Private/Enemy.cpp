@@ -38,6 +38,9 @@ void AEnemy::BeginPlay()
 	Super::BeginPlay();
 	
 	collision->OnComponentBeginOverlap.AddDynamic(this, &AEnemy::OnTriggerEnter);
+
+	// ปýธํทย
+	SetLifeSpan(3);
 }
 
 // Called every frame

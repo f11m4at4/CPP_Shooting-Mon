@@ -38,6 +38,8 @@ void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SetLifeSpan(3);
+
 }
 
 // Called every frame
