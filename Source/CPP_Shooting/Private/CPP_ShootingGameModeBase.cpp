@@ -65,6 +65,7 @@ void ACPP_ShootingGameModeBase::Playing()
 	
 }
 
+// R 키를 누르면 리셋을 하고 싶다.
 void ACPP_ShootingGameModeBase::Gameover()
 {
 
