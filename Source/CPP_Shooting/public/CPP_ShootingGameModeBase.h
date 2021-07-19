@@ -27,7 +27,14 @@ class CPP_SHOOTING_API ACPP_ShootingGameModeBase : public AGameModeBase
 public:
 	ACPP_ShootingGameModeBase();
 	
+	// Tick 함수 오버라이딩
+	virtual void Tick( float DeltaSeconds ) override;
+
 	//int state = 0;
 	UPROPERTY(EditAnywhere, Category="FSM", BlueprintReadWrite)
 	EGameState state = EGameState::Ready;
+private:
+	void Ready();
+	void Playing();
+	void Gameover();
 };
