@@ -6,6 +6,7 @@
 #include <Components/ArrowComponent.h>
 #include "Bullet.h"
 #include <Kismet/GameplayStatics.h>
+#include "CPP_ShootingGameModeBase.h"
 
 // Sets default values for this component's properties
 UPlayerFire::UPlayerFire()
@@ -51,6 +52,13 @@ void UPlayerFire::SetupPlayerInputComponent(class UInputComponent* PlayerInputCo
 // 사용자가 발사버튼을 누르면 호출
 void UPlayerFire::Fire()
 {
+	auto gameMode = Cast<ACPP_ShootingGameModeBase>(GetWorld()->GetAuthGameMode());
+	if (gameMode && gameMode->state != EGameState::Playing)
+	{
+		// 아래 내용 실행되지 않도록 하자.
+		return;
+	}
+
 	// 총알을 발사하고 싶다.
 	// 1. 총알이 필요하다.(총알을 만든다.)
 	// -> Spawn Actor

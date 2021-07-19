@@ -3,6 +3,7 @@
 
 #include "EnemyManager.h"
 #include "Enemy.h"
+#include "CPP_ShootingGameModeBase.h"
 
 // Sets default values
 AEnemyManager::AEnemyManager()
@@ -23,6 +24,13 @@ void AEnemyManager::BeginPlay()
 void AEnemyManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	auto gameMode = Cast<ACPP_ShootingGameModeBase>(GetWorld()->GetAuthGameMode());
+	if (gameMode && gameMode->state != EGameState::Playing)
+	{
+		// 아래 내용 실행되지 않도록 하자.
+		return;
+	}
 
 	// 일정시간에 한번씩 적을 만들고 싶다.
 	// 1. 시간이 흘렀으니까 -> ue4 시간이 흐르는것을 어떻게 체크

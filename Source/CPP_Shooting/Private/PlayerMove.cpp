@@ -3,6 +3,7 @@
 
 #include "PlayerMove.h"
 #include "ShootPlayer.h"
+#include "CPP_ShootingGameModeBase.h"
 
 // Sets default values for this component's properties
 UPlayerMove::UPlayerMove()
@@ -30,6 +31,13 @@ void UPlayerMove::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	// GameMode 의 상태가 Playing 이 아니라면
+	auto gameMode = Cast<ACPP_ShootingGameModeBase>(GetWorld()->GetAuthGameMode());
+	if(gameMode && gameMode->state != EGameState::Playing)
+	{
+		// 아래 내용 실행되지 않도록 하자.
+		return;
+	}
 	// 사용자의 입력에 따라 상하좌우로 이동하고 싶다.
 	// 1. 방향이 필요
 	FVector dir = FVector(0, h, v);

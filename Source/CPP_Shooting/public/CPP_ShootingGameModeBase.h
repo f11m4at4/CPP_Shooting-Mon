@@ -33,6 +33,13 @@ public:
 	//int state = 0;
 	UPROPERTY(EditAnywhere, Category="FSM", BlueprintReadWrite)
 	EGameState state = EGameState::Ready;
+
+	// 필요속성 : 일정시간(기다리는시간), 경과시간
+	UPROPERTY(EditAnywhere, Category="FSM")
+	float readyDelayTime = 2;
+
+	UPROPERTY()
+	float currentTime = 0;
 private:
 	void Ready();
 	void Playing();

@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include <Kismet/GameplayStatics.h>
 #include "ShootPlayer.h"
+#include "CPP_ShootingGameModeBase.h"
 
 // Sets default values for this component's properties
 UEnemyMove::UEnemyMove()
@@ -47,6 +48,13 @@ void UEnemyMove::BeginPlay()
 void UEnemyMove::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	auto gameMode = Cast<ACPP_ShootingGameModeBase>(GetWorld()->GetAuthGameMode());
+	if (gameMode && gameMode->state != EGameState::Playing)
+	{
+		// 아래 내용 실행되지 않도록 하자.
+		return;
+	}
 
 	// 아래로 계속 이동하고 싶다.
 	// P = P0 + vt
