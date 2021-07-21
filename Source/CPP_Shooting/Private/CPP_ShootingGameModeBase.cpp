@@ -4,6 +4,7 @@
 #include "CPP_ShootingGameModeBase.h"
 #include "CPP_Shooting.h"
 #include <Blueprint/UserWidget.h>
+#include <Kismet/GameplayStatics.h>
 
 ACPP_ShootingGameModeBase::ACPP_ShootingGameModeBase()
 {
@@ -31,6 +32,11 @@ void ACPP_ShootingGameModeBase::InitGameState()
 	{
 		// 1. playingUI ui 가 있어야 한다.
 		playingUI = CreateWidget<UUserWidget>(GetWorld(), playingUIFactory);
+	}
+	if (gameoverUI == nullptr)
+	{
+		// 1. gameoverUI ui 가 있어야 한다.
+		gameoverUI = CreateWidget<UUserWidget>(GetWorld(), gameoverUIFactory);
 	}
 
 	// 2. ui 가 화면에 보이도록 처리
@@ -69,6 +75,19 @@ void ACPP_ShootingGameModeBase::Tick(float DeltaSeconds)
 			Gameover();
 			break;
 	}
+}
+
+// Gameover 처리할 함수
+// 상태를 gameover 로 만든다, gameoverUI 띄우기
+// 게임을 정지하고 마우스 커서를 화면에 띄우고 싶다.
+void ACPP_ShootingGameModeBase::OnGameoverProcess()
+{
+	// 게임을 정지하고 마우스 커서를 화면에 띄우고 싶다.
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+
+	state = EGameState::Gameover;
+	gameoverUI->AddToViewport();
 }
 
 // Ready 상태일때 내용

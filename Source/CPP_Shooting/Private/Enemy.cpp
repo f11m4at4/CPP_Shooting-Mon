@@ -74,7 +74,7 @@ void AEnemy::OnTriggerEnter(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (player)
 	{
 		auto gameMode = Cast<ACPP_ShootingGameModeBase>(GetWorld()->GetAuthGameMode());
-		gameMode->state = EGameState::Gameover;
+		gameMode->OnGameoverProcess();
 	}
 
 	// 폭발효과 생성

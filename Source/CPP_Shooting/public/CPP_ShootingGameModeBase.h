@@ -34,6 +34,9 @@ public:
 	// Tick 함수 오버라이딩
 	virtual void Tick( float DeltaSeconds ) override;
 
+	// Gameover 처리할 함수
+	void OnGameoverProcess();
+
 	//int state = 0;
 	UPROPERTY(EditAnywhere, Category="FSM", BlueprintReadWrite)
 	EGameState state = EGameState::Ready;
@@ -52,12 +55,18 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
 	TSubclassOf<class UUserWidget> playingUIFactory;
 
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<class UUserWidget> gameoverUIFactory;
+
 	// 만들어진 ReadyUI 인스턴스
 	UPROPERTY()
 	class UUserWidget* readyUI;
 
 	UPROPERTY()
 	class UUserWidget* playingUI;
+
+	UPROPERTY()
+	class UUserWidget* gameoverUI;
 
 	// 필요속성 : 일정시간(ui 보여질시간)
 	UPROPERTY(EditAnywhere, Category="UI")
