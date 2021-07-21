@@ -26,6 +26,10 @@ class CPP_SHOOTING_API ACPP_ShootingGameModeBase : public AGameModeBase
 	
 public:
 	ACPP_ShootingGameModeBase();
+
+	virtual void BeginPlay() override;
+
+	virtual void InitGameState() override;
 	
 	// Tick 함수 오버라이딩
 	virtual void Tick( float DeltaSeconds ) override;
@@ -40,6 +44,25 @@ public:
 
 	UPROPERTY()
 	float currentTime = 0;
+
+	// Ready UI Widget
+	UPROPERTY(EditDefaultsOnly, Category="UI")
+	TSubclassOf<class UUserWidget> readyUIFactory;
+
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSubclassOf<class UUserWidget> playingUIFactory;
+
+	// 만들어진 ReadyUI 인스턴스
+	UPROPERTY()
+	class UUserWidget* readyUI;
+
+	UPROPERTY()
+	class UUserWidget* playingUI;
+
+	// 필요속성 : 일정시간(ui 보여질시간)
+	UPROPERTY(EditAnywhere, Category="UI")
+	float playingUITime = 1;
+
 private:
 	void Ready();
 	void Playing();
